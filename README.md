@@ -54,3 +54,26 @@ can write to.  The message will look like:
 
 ## Usage (winston 2.x)
 
+```javascript
+const winston = require( 'winston' );
+require( 'winston-rocketchat' );
+
+const rcTransport = new winston.transports.RocketChat({
+  host: '192.168.99.100',
+  ssl: false,
+  user: 'logger',
+  pass: 'logger',
+  room: 'logs',
+  program: 'myscriptname'
+});
+
+let logger = new (winston.Logger)({
+  transports: [
+    new winston.transports.Console(),
+    rcTransport
+  ]
+});
+
+logger.info( 'My first log message!' );
+```
+
